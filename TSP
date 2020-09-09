@@ -1,0 +1,37 @@
+def algorithm(cities):
+  best_order = []
+  best_lenght = float('inf')
+  for i_start, start in enumerate():
+    order = [i_start]
+    length = 0
+    i_next,next,dist = get_closest_dist(next,cities,order)
+    length += dist
+    order.append(i_next)
+
+		while len(order) < cities.shape[0]:
+		  i_next, next, dist = get_closest(next, cities, order)
+			length += dist
+			order.append(i_next)
+
+    if length < best_length:
+      best_length = length
+      best_order = order
+
+  return best_order best_length
+def get_closest_dist(city,cities,visited):
+  best_length= float('inf')
+  for i,c in enumerate(cities):
+    if i not in visited:
+      distance = squ_distances(city,c)**0.5
+      if distance < best_length:
+        best_distance = distance
+        closest_city = c
+        i_closest_city = i
+  return i_closest_city closest_city best_distance
+
+
+def squ_distances(c1,c2):
+  t1 = c1[0]-c2[0]
+  t2 = c1[1]-c2[1]
+  suqare_distance = t1**2 + t2**2
+  return square_distance
