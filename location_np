@@ -1,0 +1,19 @@
+from geopy.geocoders import Nominatim
+location_list = ["Oak Park, Illinois, USA", "Horton Bay, Michigan, USA", 
+                 "Paris, France", "Pamplona, Spain", "Madrid, Spain", 
+                 "Havana, Cuba", "Key West, Florida, USA", "Ketchum, Idaho"]
+                 import pandas as pd
+locator = Nominatim(user_agent="myGeocoder")
+df = pd.DataFrame(location_list, columns = ['location'])
+df["latitude"] = df.location.apply(lambda x: locator.geocode(x).latitude)
+df["longitude"] = df.location.apply(lambda x: locator.geocode(x).longitude)
+df
+import geopandas
+gdf = geopandas.GeoDataFrame(df, geometry=geopandas.points_from_xy(df.longitude, df.latitude))
+import matplotlib.pyplot as plt
+world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
+ax = world.plot(color='white', edgecolor='black', figsize=(20, 15))
+gdf.plot(ax=ax, color='red')
+plt.show()
+import matplotlib.pyplot as plt
+plt.scatter(df["longitude"], df["latitude"])
